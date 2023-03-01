@@ -3,20 +3,33 @@
 //78 -> третьей цифры нет
 //32679 -> 6
 
-Console.Clear();
-Console.WriteLine("Введите любое число: ");
-int num = int.Parse(Console.ReadLine());
-int count = 0;
-if (num < 100 )
+int Prompt(string message)
 {
-   Console.WriteLine("Третьей цифры нет "); 
+    Console.Write(message);
+    string value = Console.ReadLine();
+    int result = Convert.ToInt32(value);
+    return result;
 }
-if (num>=100 && num < 1000) 
+
+int GetThirdRank(int number)
 {
-Console.WriteLine($"Третья цифра числа {num} -> {num%10}");
+    while (number > 999)
+    {
+        number/=10;
+    }
+    return number % 10;
 }
-while (num > 1000)
+bool ValidateNumber (int number)
 {
-    Console.WriteLine($"{num} -> {num / Convert.ToInt32(Math.Pow(10,count-2)) % 10}");
-    count++;
+    if (number<100)
+    {
+        Console.WriteLine ("Третьей цифры нет");
+        return false;
+    }
+    return true;
+}
+int number = Prompt ("Введите число > ");
+if (ValidateNumber(number))
+{
+    Console.WriteLine(GetThirdRank(number));
 }
